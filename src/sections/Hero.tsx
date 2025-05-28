@@ -11,9 +11,7 @@ export const Hero = () => {
         <div className="md:flex items-center">
           {/* left text side */}
           <div className="md:w-[478px]">
-            <div className="text-sm inline-flex border border-[#222]/10 rounded-lg px-3 py-1 tracking-tight">
-              Version 2.0 is here
-            </div>
+            <div className="tag">Version 2.0 is here</div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6">
               Pathway to productivity
             </h1>
