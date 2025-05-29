@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
@@ -10,7 +12,7 @@ import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -82,28 +84,44 @@ interface TestimonialColProps {
 
 const TestimonialCol = ({ col }: TestimonialColProps) => {
   return (
-    <div className="flex flex-col gap-6  [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
-      {/* a col */}
-      {col.map(({ text, imageSrc, name, username }) => (
-        <div key={username} className="card">
-          <div>{text}</div>
-          <div className="flex items-center gap-2 mt-5">
-            <Image
-              src={imageSrc}
-              alt={name}
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-full"
-            />
+    <motion.div
+      animate={{
+        translateY: ["0%", "-50%"],
+      }}
+      transition={{
+        repeat: Infinity,
+        duration: 5,
+        repeatType: "reverse",
+        ease: "linear",
+      }}
+      className="flex flex-col gap-6 pb-6"
+    >
+      {[...new Array(2)].fill(0).map((_, index) => (
+        <React.Fragment key={index}>
+          {col.map(({ text, imageSrc, name, username }) => (
+            <div key={`${username}-${index}`} className="card">
+              <div>{text}</div>
+              <div className="flex items-center gap-2 mt-5">
+                <Image
+                  src={imageSrc}
+                  alt={name}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full"
+                />
 
-            <div className="flex flex-col">
-              <div className="font-medium tracking-tight leading-5">{name}</div>
-              <div className="leading-5 tracking-tight">{username}</div>
+                <div className="flex flex-col">
+                  <div className="font-medium tracking-tight leading-5">
+                    {name}
+                  </div>
+                  <div className="leading-5 tracking-tight">{username}</div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ))}
+        </React.Fragment>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
@@ -149,7 +167,7 @@ export const Testimonials = () => {
         </div>
 
         {/* The grid columns */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 justify-center">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 justify-center [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] overflow-hidden">
           {slicedColumns.map((col, colIndex: number) => (
             <TestimonialCol key={colIndex} col={col} />
           ))}
