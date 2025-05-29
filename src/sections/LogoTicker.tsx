@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import acmeLogo from "@/assets/logo-acme.png";
 import quantumLogo from "@/assets/logo-quantum.png";
@@ -12,7 +15,16 @@ export const LogoTicker = () => {
     <div className="py-8 md:py-12 bg-white">
       <div className="container">
         <div className="overflow-hidden sm:[mask-image:linear-gradient(to_right,transparent,black,black,transparent)] [mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_95%,transparent_100%)]">
-          <div className="flex gap-14 flex-none">
+          <motion.div
+            className="flex gap-14 flex-none pr-14"
+            animate={{ translateX: "-50%" }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+          >
             <Image
               className="logo-ticker-image"
               src={acmeLogo}
@@ -43,7 +55,39 @@ export const LogoTicker = () => {
               src={apexLogo}
               alt="Apex Logo"
             />
-          </div>
+
+            {/* Second set of logosfor animation */}
+            <Image
+              className="logo-ticker-image"
+              src={acmeLogo}
+              alt="Acme Logo"
+            />
+            <Image
+              className="logo-ticker-image"
+              src={quantumLogo}
+              alt="Quantum Logo"
+            />
+            <Image
+              className="logo-ticker-image"
+              src={echoLogo}
+              alt="Echo Logo"
+            />
+            <Image
+              className="logo-ticker-image"
+              src={celestialLogo}
+              alt="Celestial Logo"
+            />
+            <Image
+              className="logo-ticker-image"
+              src={pulseLogo}
+              alt="Pulse Logo"
+            />
+            <Image
+              className="logo-ticker-image"
+              src={apexLogo}
+              alt="Apex Logo"
+            />
+          </motion.div>
         </div>
       </div>
     </div>
