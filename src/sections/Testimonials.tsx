@@ -1,3 +1,5 @@
+"use client";
+
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
@@ -7,6 +9,8 @@ import avatar6 from "@/assets/avatar-6.png";
 import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -65,6 +69,92 @@ const testimonials = [
   },
 ];
 
+interface Testimonial {
+  text: string;
+  imageSrc: string;
+  name: string;
+  username: string;
+}
+
+interface TestimonialColProps {
+  col: Testimonial[];
+}
+
+const TestimonialCol = ({ col }: TestimonialColProps) => {
+  return (
+    <div className="flex flex-col gap-6  [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
+      {/* a col */}
+      {col.map(({ text, imageSrc, name, username }) => (
+        <div key={username} className="card">
+          <div>{text}</div>
+          <div className="flex items-center gap-2 mt-5">
+            <Image
+              src={imageSrc}
+              alt={name}
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full"
+            />
+
+            <div className="flex flex-col">
+              <div className="font-medium tracking-tight leading-5">{name}</div>
+              <div className="leading-5 tracking-tight">{username}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const Testimonials = () => {
-  return null;
+  const [colNum, setColNum] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width >= 1200) {
+        setColNum(3);
+      } else if (width >= 768) {
+        setColNum(2);
+      } else {
+        setColNum(1);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const slicedColumns = [];
+  for (let i = 0; i < colNum; i++) {
+    slicedColumns.push(testimonials.slice(i * 3, (i + 1) * 3));
+  }
+
+  return (
+    <section className="bg-white">
+      <div className="container">
+        <div className="section-heading">
+          <div className="flex justify-center">
+            <div className="tag">Testimonials</div>
+          </div>
+          <h2 className="section-title mt-5">What our users say</h2>
+          <p className="section-description mt-5">
+            From intuitive design to powerful features, our app has become an
+            essential tool for users around the world
+          </p>
+        </div>
+
+        {/* The grid columns */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 justify-center">
+          {slicedColumns.map((col, colIndex: number) => (
+            <TestimonialCol key={colIndex} col={col} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
