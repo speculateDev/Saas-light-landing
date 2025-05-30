@@ -8,6 +8,8 @@ import ArrowRight from "@/assets/arrow-right.svg";
 import springImage from "@/assets/spring.png";
 import starImage from "@/assets/star.png";
 
+const MotionImage = motion(Image);
+
 export const CallToAction = () => {
   const sectionRef = useRef(null);
 
@@ -40,8 +42,8 @@ export const CallToAction = () => {
           </div>
 
           {/* Images */}
-          <motion.img
-            src={springImage.src}
+          <MotionImage
+            src={springImage}
             alt="Spring image"
             width={360}
             className="hidden md:block absolute -right-[331px] -top-[19px]"
@@ -50,8 +52,8 @@ export const CallToAction = () => {
             }}
           />
 
-          <motion.img
-            src={starImage.src}
+          <MotionImage
+            src={starImage}
             alt="Star image"
             width={360}
             className="hidden md:block absolute -left-[350px] -top-[137px]"

@@ -8,6 +8,8 @@ import pyramidImage from "@/assets/pyramid.png";
 import tubeImage from "@/assets/tube.png";
 import { useRef } from "react";
 
+const MotionImage = motion(Image);
+
 export const ProductShowcase = () => {
   const sectionRef = useRef(null);
 
@@ -40,8 +42,8 @@ export const ProductShowcase = () => {
         <div className="relative">
           <Image src={productImage} alt="product image" className="mt-10" />
 
-          <motion.img
-            src={pyramidImage.src}
+          <MotionImage
+            src={pyramidImage}
             alt="Pyramid image"
             height={262}
             width={262}
@@ -51,8 +53,8 @@ export const ProductShowcase = () => {
             }}
           />
 
-          <motion.img
-            src={tubeImage.src}
+          <MotionImage
+            src={tubeImage}
             alt="Tube image"
             height={248}
             width={248}

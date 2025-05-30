@@ -14,6 +14,8 @@ import cylinderImage from "@/assets/cylinder.png";
 import noodleImage from "@/assets/noodle.png";
 import { useRef } from "react";
 
+const MotionImage = motion(Image);
+
 export const Hero = () => {
   const heroRef = useRef(null);
 
@@ -56,10 +58,10 @@ export const Hero = () => {
           </div>
 
           <div className="mt-20 md:mt-0 md:h-[648px] md:flex-1 relative">
-            <motion.img
-              src={cogImage.src}
+            <MotionImage
+              src={cogImage}
               alt="Cog image"
-              className="md:absolute md:h-full md:w-auto md:max-w-none md:-left-6 lg:-left-0 -translate-y-[30px]  "
+              className="md:absolute md:h-full md:w-auto md:max-w-none md:-left-6 lg:-left-0 -translate-y-[30px]"
               animate={{
                 translateY: [-30, 30],
               }}
@@ -71,19 +73,19 @@ export const Hero = () => {
               }}
             />
 
-            <motion.img
-              src={cylinderImage.src}
+            <MotionImage
+              src={cylinderImage}
               alt="Cylinder image"
-              height={220}
               width={220}
+              height={220}
               className="hidden md:block md:absolute -top-8 -left-32"
               style={{
                 translateY: translateY,
               }}
             />
 
-            <motion.img
-              src={noodleImage.src}
+            <MotionImage
+              src={noodleImage}
               alt="Noodle image"
               width={220}
               className="hidden lg:block absolute top-[524px] left-[448px] rotate-[30deg]"
